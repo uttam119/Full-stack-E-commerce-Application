@@ -3,10 +3,12 @@ class AuthService{
     login =async(data)=>{
         try{
       const response = await axiosInstance.post("/v1/login",data)
+      console.log("first")
       console.log(response)
       localStorage.setItem("token",response.result.token)
       const getLoggedInUser= await this.getLoggedInUser()
       console.log(getLoggedInUser)
+      console.log("second")
       return getLoggedInUser;
        
         }catch(exception){
@@ -23,10 +25,13 @@ class AuthService{
 
 
         }
-        const response= await axiosInstance.get("/v1/me",{
-            headers:{
+        const response= await axiosInstance.get(
+            "/v1/me",
+            {
+            headers:
+            {
                 "Content-Type":"application/json",
-                "Authorization":"Bearer"+token
+                "Authorization": "Bearer "+token 
             }
            
         }

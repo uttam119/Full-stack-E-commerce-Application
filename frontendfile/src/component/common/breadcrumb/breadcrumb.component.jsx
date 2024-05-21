@@ -10,9 +10,9 @@ return (
      {
 
        data.map((row,index)=>(
-        <li className="breadcrumb.item" key={index}>
+        <li className="breadcrumb-item" key={index}>
             {
-                row.url?<NavLink to={row.url}>{row.title} </NavLink> :row.title
+                row.url? <NavLink to={row.url}> {row.title} </NavLink> :row.title
             }
         </li>
 

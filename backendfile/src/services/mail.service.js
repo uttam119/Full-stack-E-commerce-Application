@@ -2,10 +2,10 @@ require('dotenv').config();
 const nodemailer = require("nodemailer")
 
 class MailService {
-    tranrport;
+    transport;
     constructor() {
         try{
-            this.tranrport = nodemailer.createTransport({
+            this.transport = nodemailer.createTransport({
                 host: process.env.SMTP_HOST,
                 port: process.env.SMTP_PORT,
                 auth: {
@@ -20,7 +20,7 @@ class MailService {
 
     async emailSend(to, sub, message) {
         try {
-            await this.tranrport.sendMail({
+            await this.transport.sendMail({
                 to: to, 
                 from: process.env.SMTP_FROM,
                 subject: sub,

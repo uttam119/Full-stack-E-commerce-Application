@@ -38,7 +38,7 @@ return (
 
   </Navbar>
      */}
-     Home Page Footer
+   
     </>
 )
 

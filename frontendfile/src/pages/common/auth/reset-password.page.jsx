@@ -9,6 +9,7 @@ const ResetPassword=()=>{
 
     const[loading,setLoading] = useState(false);
     const params= useParams()
+    console.log(params)
     const navigate=useNavigate()
 
     const {register,handleSubmit,formState:{errors}}=useForm()
@@ -31,6 +32,7 @@ const ResetPassword=()=>{
 
 const submitHandle = async(data)=>{
     try{
+      console.log(data)
         const response= await authSvc.submitForPasswordUpdate(params.token,data)
         toast.success(response.message)
         navigate("/login")
@@ -53,68 +55,63 @@ return(
             {
                 loading ? "Loading...":<>
              
-            <Form onSubmit={handleSubmit(submitHandle)}>
-              <Form.Group className="row mb-3">
-                <Form.Label className="col-sm-3" htmlFor="password">
-                Password:
-                </Form.Label>
+             <Form onSubmit={handleSubmit(submitHandle)}>
+  <Form.Group className="row mb-3">
+    <Form.Label className="col-sm-3" htmlFor="password">
+      Password:
+    </Form.Label>
+    <Col sm={9}>
+      <FormControl
+        type="password"
+        placeholder="Enter Your Password"
+        id="password"
+        size="sm"
+        {...register("password", { required: true })}
+      />
+      <em className="text-danger">
+        {errors.password && errors.password.message}
+      </em>
+    </Col>
+  </Form.Group>
+  <Form.Group className="row mb-3">
+    <Form.Label className="col-sm-3" htmlFor="confirmPassword">
+      Confirm Password:
+    </Form.Label>
+    <Col sm={9}>
+      <FormControl
+        type="password"
+        placeholder="Confirm Your Password"
+        id="confirmPassword"
+        size="sm"
+        {...register("confirmPassword", { required: true })}
+      />
+      <em className="text-danger">
+        {errors.confirmPassword && errors.confirmPassword.message}
+      </em>
+    </Col>
+  </Form.Group>
+  <Form.Group className="row mb-3">
+    <Col sm={{ offset: 3, span: 9 }}>
+      <Button
+        type="button" // Change type to "button"
+        size="sm"
+        variant="danger"
+        className=" me-3"
+      >
+        <FaUndo /> Reset
+      </Button>
+      <Button
+        type="submit"
+        size="sm"
+        variant="success"
+        className=" me-3"
+      >
+        <FaPaperPlane /> Submit
+      </Button>
+    </Col>
+  </Form.Group>
+</Form>
 
-                <Col sm={9}>
-                  <FormControl
-                    type="password"
-                    placeholder="Enter Your Password"
-                    id="password"
-                    size="sm"
-                    {...register("name", { required: true })}
-                  />
-                  <em className="text-danger">
-                    {errors.password && errors.password.message}
-                  </em>
-                </Col>
-              </Form.Group>
-              <Form.Group className="row mb-3">
-                <Form.Label className="col-sm-3" htmlFor="password">
-               Confirm Password:
-                </Form.Label>
-
-                <Col sm={9}>
-                  <FormControl
-                    type="password"
-                    placeholder="Enter Your Password"
-                    id="password"
-                    size="sm"
-                    {...register("name", { required: true })}
-                  />
-                  <em className="text-danger">
-                    {errors.password && errors.password.message}
-                  </em>
-                </Col>
-              </Form.Group>
-
-              <Form.Group className="row mb-3">
-                <Col sm={{ offset: 3, span: 9 }}>
-                  <Button
-                    type="reset"
-                    size="sm"
-                    variant="danger"
-                    className=" me-3"
-                  >
-                    <FaUndo /> Reset
-                  </Button>
-
-                  <Button
-                    type="submit"
-                    size="sm"
-                    variant="success"
-                    className=" me-3"
-                  >
-                    <FaPaperPlane /> Register
-                  </Button>
-                </Col>
-              </Form.Group>
-    
-    
-    </Form>
     </>
     }
     </Col>

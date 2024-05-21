@@ -1,11 +1,15 @@
 import { Navbar, Container, Nav, Row, Col, Button, Form } from "react-bootstrap"
-import { FaHome } from "react-icons/fa"
+import { FaAddressBook, FaBlog, FaHome, FaListAlt, FaProductHunt } from "react-icons/fa"
 import { Link, NavLink } from "react-router-dom";
 import { useTheme } from "../../../themeContext";
 import { useAuth } from "../../../config/auth.config";
+import { useSelector } from "react-redux";
 const HomeHeaderComponent = () => {
     // const { isDarkTheme } = useTheme()
-    const { loggedInUser } = useAuth()
+    // const { loggedInUser } = useAuth()
+  const loggedInUser=useSelector((store)=>{
+     return store.auth.loggedInUser
+  })
 
     return (<>
 
@@ -18,7 +22,7 @@ const HomeHeaderComponent = () => {
 
                     {
                         loggedInUser ? <>
-                            <NavLink className=" btn btn-sm btn-success float-end me-3" to="/logout">
+                            <NavLink className=" btn btn-sm btn-success float-end me-3" to="/login">
                             <i className="fa fa-right-to-bracket me-1"></i>
                                 Logout</NavLink>
                             <Link className=" btn btn-sm btn-success float-end me-3" to={"/"+loggedInUser.role}>
@@ -51,7 +55,7 @@ const HomeHeaderComponent = () => {
         </Container>
 
         {/* <Navbar variant={isDarkTheme ? "dark" : "light"} expand="lg" bg={isDarkTheme ? "dark" : "light"}> */}
-        <Navbar variant="dark" expand="lg" bg="light">
+        <Navbar variant="dark" expand="lg" bg="dark">
             <Container fluid style={{ minHeight: "70px" }}>
                 <Navbar.Brand href="/">
                     Navbar
@@ -62,7 +66,7 @@ const HomeHeaderComponent = () => {
 
                 <Navbar.Collapse id="dropDown">
                     <Nav className="me-auto">
-                        <NavLink className="nav-link" to="/">
+                        <NavLink className="nav-link" color="blue" to="/">
                             <FaHome size={15} className="me-2" color="red" />
 
                             Home
@@ -70,11 +74,11 @@ const HomeHeaderComponent = () => {
 
 
                         </NavLink >
-                        <NavLink className="nav-link" to="/brand" >Brand</NavLink >
-                        <NavLink className="nav-link" to="/list-all" >Products</NavLink >
-                        <Nav.Link href="/category" >Categories</Nav.Link >
-                        <Nav.Link href="/blogs-list" >Blogs</Nav.Link >
-                        <Nav.Link href="/contact-us" >Contact</Nav.Link >
+                        <NavLink className="nav-link" to="/brand" > <FaHome size={15} className="me-2" color="red" />Brand</NavLink >
+                        <NavLink className="nav-link" to="/list-all" > <FaProductHunt size={15} className="me-2" color="red" />Products</NavLink >
+                        <Nav.Link  className="nav-link" to="/categories" > <FaListAlt size={15} className="me-2" color="red" />Categories</Nav.Link >
+                        <Nav.Link  className="nav-link" to="/blogs" > <FaBlog size={15} className="me-2" color="red" />Blogs</Nav.Link >
+                        <Nav.Link  className="nav-link" to="/contact" > <FaAddressBook size={15} className="me-2" color="red" />Contact</Nav.Link >
                     </Nav>
 
                     <Nav>

@@ -35,11 +35,14 @@ import { FaPaperPlane, FaUndo } from "react-icons/fa";
 import authSvc from "../service/auth.service";
 import {toast} from "react-toastify"
 import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {  setLoggedInUser } from "../../../../reducers/auth.reducers";
 
 const LoginPage = () => {
   // const [emailErr,setEmailErr] =useState();
   // const [data,setData] = useState();
   const navigate= useNavigate();
+  const dispatch = useDispatch()
 
   const loginSchema= yup.object().shape({
     email:yup.string().email("Username should be a valid email").required("Email is required"),
@@ -77,12 +80,18 @@ const LoginPage = () => {
   const onSubmit= async(value)=>{
     try{
  const response = await authSvc.login(value)
+ dispatch(setLoggedInUser(response.result))
+
   toast.success("Welcome to Admin Pannel")
-  Navigate("/"+response.result.role)
-  console.log(response);
+  
+  console.log(response.result.role)
+  console.log(response.result.role)
+
+  navigate("/"+response.result.role)
+
  
     }catch(exception){
-      console.log(exception.message)
+    
       toast.error(exception.message,{theme:"colored"})
     }
   

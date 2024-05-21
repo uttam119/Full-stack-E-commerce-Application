@@ -6,20 +6,23 @@ import "bootstrap";
  import "./assets/css/main.css"
  import "@fortawesome/fontawesome-free/css/all.min.css"
  import Routing from "./config/router.config";
+import store from './config/store.config';
+import { Provider } from 'react-redux';
 // import "./pages/home/landing.page.module.css";
 // import App from './App.jsx'
 // import './index.css'
-const pageTitle="Landing Page";
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  //  <React.StrictMode>
 <>
+<Provider store={store}>
 <Routing/>
-
+</Provider>
     {/* <App /> */}
 {/* <LandingPage name ="Uttam Parajuli"  userlist={[{name:'UTTAM'}]}  address="kathmanduu" title ={pageTitle}></LandingPage> */}
     {/* <Component1></Component1> */}
 
-  {/* </React.StrictMode> */}
+  {/* //  </React.StrictMode>  */}
   </>
 )
