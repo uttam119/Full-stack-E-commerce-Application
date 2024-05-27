@@ -69,7 +69,9 @@ return response
 
     getProductDetail=async(slug)=>{
         try{
+            console.log("i am here after while",slug)
          const response= await this.getRequest("/v1/product/"+slug+"/slug")
+         console.log("hi thers",response)
         return response
         }catch(exception){
             throw exception;

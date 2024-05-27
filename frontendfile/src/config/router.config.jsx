@@ -20,7 +20,7 @@ import PermissionCheck from "./checkPermission.config.jsx";
 import BannerList from "../pages/cms/banner/banner-list.page"
 import BannerCreate from "../pages/cms/banner/banner-create.page";
 import BannerEdit from "../pages/cms/banner/banner-edit.page.jsx";
-import {Provider, useDispatch }from "react-redux"
+import {Provider, useDispatch, useSelector }from "react-redux"
 import store from "./store.config.js";
 import { useEffect } from "react";
 import { loggedInUserSet } from "../reducers/auth.reducers.jsx";
@@ -34,6 +34,11 @@ import ProductList from "../pages/cms/product/product-list.page.jsx";
 import ProductCreate from "../pages/cms/product/product-create.page.jsx";
 import ProductEdit from "../pages/cms/product/product-edit.page.jsx";
 import ProductDetail from "../pages/home/product/product-detail.page.jsx";
+import CategoryHomeListComponent from "../component/home/category/category-list-home.component.jsx";
+import CategoryHomeListComponentForCategory from "../component/home/category/category-list-home.component for  category.jsx";
+import BrandHomeListComponent from "../component/home/brand/brand-list-home.component.jsx";
+import ProductHomeListComponent from "../component/home/product/product-list-home.component.jsx";
+import { Container } from "react-bootstrap";
 // import {BannerList,BannerCreate,BannerEdit} from "../pages/cms/banner/index.jsx";
 
 
@@ -43,13 +48,18 @@ const Routing =()=>{
   dispatch(loggedInUserSet())
  },[])
 
+ const isDarkTheme=useSelector((store)=>{
+  return store.theme.isDarkTheme
+})
+
+
     return (
       
         <>
          {/* <AuthProvider> */}
          {/* <Provider store={store}> */}
         {/* <ToastContainer theme ="dark"/> */}
-        
+        <Container fluid variant={isDarkTheme ? "dark" : "light"} expand="lg" bg={isDarkTheme ? "dark" : "light"}>
         <BrowserRouter>
         
         
@@ -63,7 +73,9 @@ const Routing =()=>{
   <Route path="activate/:token" element ={<ActivateUser/>}></Route>
   <Route path="forget-password" element ={<ForgetPassword/>}></Route>
   <Route path="set-password/:token" element ={<ResetPassword/>}></Route>
-  <Route path ="category" element ={<>All List of Cats</>}></Route>
+  <Route path ="category" element ={<CategoryHomeListComponentForCategory/>}></Route>
+  <Route path ="brand" element ={<BrandHomeListComponent/>}></Route>
+  <Route path ="product" element ={<ProductHomeListComponent/>}></Route>
   <Route path ="category/:catSlug" element ={<CategoryDetail/>}></Route>
   <Route path ="product-detail/:slug" element ={<ProductDetail/>}></Route>
   <Route path="*" element ={<Error404Page/>}></Route>
@@ -118,6 +130,7 @@ const Routing =()=>{
         
         
         </BrowserRouter>
+        </Container>
         {/* </AuthProvider> */}
         {/* </Provider> */}
         </>

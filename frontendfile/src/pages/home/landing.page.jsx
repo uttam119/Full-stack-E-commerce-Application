@@ -4,31 +4,52 @@ import {Container,Row,Col, Card, Nav} from "react-bootstrap"
 import HomeComponent from "../../component/home";
 import apple from "../../assets/images/brand/apple.png"
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const landingTitleCss={
    backgroundColor:"#cccddd",
    margin:"20px"
 }
 const LandingPage = (props)=>{
- 
-    return (
+   const isDarkTheme=useSelector((store)=>{
+      return store.theme.isDarkTheme
+   })
+   console.log(isDarkTheme)
+      return (
     <>
    
+{/* <div style={homelayout}> */}
+   
 
-
-  <Container fluid>
+  <Container fluid className={isDarkTheme?"bg-dark":"bg-white"}>
     <Row>
- <Col sm={12} md={4} lg={3}>
+ <Col sm={12} md={4} lg={4}>
  <HomeComponent.CategoryHomeListComponent/>
  
+ 
  </Col>
+ 
 
- <Col sm={12} md={8} lg={9}>
+ <Col sm={12} md={8} lg={8}>
     <HomeComponent.BannerListHomeComponent/>
  </Col>
     </Row>
+   
+  </Container>
+  <Container fluid className={isDarkTheme?"bg-dark":"bg-white"}>
+  
+      <HomeComponent.BrandHomeListComponent datame={isDarkTheme}/>
+      
+
   </Container>
 
-   <Container fluid>
+  <Container fluid className={isDarkTheme?"bg-dark":"bg-white"}>
+  
+  <HomeComponent.ProductHomeListComponent datame={isDarkTheme}/>
+  
+
+</Container>
+
+   {/* <Container fluid>
       <Row>
       <Col sm={12} md={12} lg={{offset:2 ,span:8}} className="py-3">
       <h4 className="text-center">Brand List List</h4>
@@ -153,9 +174,9 @@ const LandingPage = (props)=>{
          </Col>
          
       </Row>
-   </Container>
+   </Container> */}
 
- <Container fluid>
+ {/* <Container fluid>
   <Row>
    <Col sm={12} md={12} lg={{offset:2 ,span:8}} className="py-3">
       <h4 className="text-center">Product List</h4>
@@ -707,8 +728,9 @@ const LandingPage = (props)=>{
          </Col>
          
       </Row>
- </Container>
+ </Container> */}
 
+{/* </div> */}
    </> )
 }
 

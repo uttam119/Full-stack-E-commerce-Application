@@ -14,6 +14,7 @@ const CategoryDetail = () => {
     const[detail,setDetail]=useState()
     const getCatDetail=useCallback(async ()=>{
         try{  
+            console.log("meow",params.catSlug)
             const response=await categorySvc.getCategoryDetail(params.catSlug)
             console.log("category-detail",response)
             setDetail(response.result)
@@ -45,6 +46,7 @@ const CategoryDetail = () => {
 
                 <Row>
                     {detail?.products && detail?.products.map((prod,ind)=>(
+                      
                         <SingleProductGrid 
                         
                         detail={prod}
@@ -52,6 +54,7 @@ const CategoryDetail = () => {
                         />
                     ))
                     }
+                     
                 </Row>
             </Container>
 

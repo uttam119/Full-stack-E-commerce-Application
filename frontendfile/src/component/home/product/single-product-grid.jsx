@@ -3,15 +3,18 @@ import { NavLink } from "react-router-dom"
 
 const SingleProductGrid = ({detail}) => {
     console.log("jere",detail)
+    console.log("impodf",detail.slug)
     return (
         
+        
         <>
+      
     
 {
     detail && 
     <Col sm={6} md={4} lg={2} className="mb-3">
         <Card>
-            <Card.Img variant="top"  src={import.meta.env.VITE_IMAGE-URL+"/product/"+detail.images[0]}></Card.Img>
+            <Card.Img variant="top"  src={import.meta.env.VITE_IMAGE_URL+"/product/"+detail.images[0]}></Card.Img>
 
             <Card.Body>
                 <Card.Text as={"div"}>

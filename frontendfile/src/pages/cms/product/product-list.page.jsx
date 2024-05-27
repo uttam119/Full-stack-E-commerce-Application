@@ -26,7 +26,7 @@ const ProductList = () => {
       console.log("first");
 
       let response = await productSvc.listAllProduct({ page });
-      console.log(response.result);
+      console.log("here",response.result);
 
       setProductList(response.result);
       const pageInfo = { ...response.meta };
@@ -108,6 +108,7 @@ const ProductList = () => {
                   <>
                     {productList.map((row, ind) => (
                       <tr key={ind}>
+                        {/* <td>{row.image}</td> */}
                         <td>{row.title}</td>
                         <td>{row?.category?.title}</td>
                        
@@ -125,7 +126,7 @@ const ProductList = () => {
                             src={
                               import.meta.env.VITE_IMAGE_URL +
                               "/product/" +
-                              row.image
+                              row.images[0]
                             }
                             thumbnail
                             fluid

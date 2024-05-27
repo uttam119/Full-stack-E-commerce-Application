@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useTheme } from "../../../themeContext";
 import { useAuth } from "../../../config/auth.config";
 import { useSelector } from "react-redux";
+import ThemeSwitch from "../../../component/common/switcher/theme-switcher.jsx"
+import Hello from "../../../component/common/switcher/hello-me.jsx";
 const HomeHeaderComponent = () => {
     // const { isDarkTheme } = useTheme()
     // const { loggedInUser } = useAuth()
@@ -11,21 +13,26 @@ const HomeHeaderComponent = () => {
      return store.auth.loggedInUser
   })
 
+ 
+  const isDarkTheme=useSelector((store)=>{
+    return store.theme.isDarkTheme
+ })
+
     return (<>
 
         <Container fluid className="bg-success bg-opacity-50">
             <Row className="py-2">
                 <Col sm={12} md={6}>
-                    <strong>Welcome to E commerce</strong>
+                    <strong className="mx-5 " >Welcome to E commerce</strong>
                 </Col>
                 <Col sm={12} md={6} >
 
                     {
                         loggedInUser ? <>
-                            <NavLink className=" btn btn-sm btn-success float-end me-3" to="/login">
+                            <NavLink className=" btn btn-sm btn-success float-end me-5" to="/login">
                             <i className="fa fa-right-to-bracket me-1"></i>
                                 Logout</NavLink>
-                            <Link className=" btn btn-sm btn-success float-end me-3" to={"/"+loggedInUser.role}>
+                            <Link className=" btn btn-sm btn-success float-end me-5" to={"/"+loggedInUser.role}>
                                <i className="fa fa-user me-1"></i>
                                 {loggedInUser.name}
                             </Link>
@@ -46,7 +53,8 @@ const HomeHeaderComponent = () => {
                         </>
 
                     }
-                    {/* <ThemeSwitch/> */}
+                    <ThemeSwitch/>
+                  
                 </Col>
 
 
@@ -54,34 +62,31 @@ const HomeHeaderComponent = () => {
 
         </Container>
 
-        {/* <Navbar variant={isDarkTheme ? "dark" : "light"} expand="lg" bg={isDarkTheme ? "dark" : "light"}> */}
-        <Navbar variant="dark" expand="lg" bg="dark">
-            <Container fluid style={{ minHeight: "70px" }}>
-                <Navbar.Brand href="/">
-                    Navbar
-                </Navbar.Brand>
-
+        <Navbar variant={isDarkTheme ? "dark" : "light"} expand="lg" bg={isDarkTheme ? "dark" : "light"}>
+        {/* <Navbar variant="dark" expand="lg" bg="dark"> */}
+            <Container fluid style={{ minHeight: "70px" }} >
+               
                 <Navbar.Toggle aria-controls="dropDown" >
                 </Navbar.Toggle>
 
                 <Navbar.Collapse id="dropDown">
-                    <Nav className="me-auto">
-                        <NavLink className="nav-link" color="blue" to="/">
-                            <FaHome size={15} className="me-2" color="red" />
+                    <Nav className="me-auto mx-5">
+                        <NavLink className="nav-link ms-5" color="blue" to="/">
+                            <FaHome size={15} className=" ml-5 me-2" color="red" />
 
                             Home
 
 
 
                         </NavLink >
-                        <NavLink className="nav-link" to="/brand" > <FaHome size={15} className="me-2" color="red" />Brand</NavLink >
-                        <NavLink className="nav-link" to="/list-all" > <FaProductHunt size={15} className="me-2" color="red" />Products</NavLink >
-                        <Nav.Link  className="nav-link" to="/categories" > <FaListAlt size={15} className="me-2" color="red" />Categories</Nav.Link >
-                        <Nav.Link  className="nav-link" to="/blogs" > <FaBlog size={15} className="me-2" color="red" />Blogs</Nav.Link >
-                        <Nav.Link  className="nav-link" to="/contact" > <FaAddressBook size={15} className="me-2" color="red" />Contact</Nav.Link >
+                        <NavLink className="nav-link ms-5" to="/brand" > <FaHome size={15} className="me-4" color="red" />Brand</NavLink >
+                        <NavLink className="nav-link ms-5" to="/product" > <FaProductHunt size={15} className="me-4" color="red" />Products</NavLink >
+                        <NavLink  className="nav-link ms-5" to="/category" > <FaListAlt size={15} className="me-4" color="red" />Categories</NavLink >
+                        <NavLink  className="nav-link ms-5" to="/blogs" > <FaBlog size={15} className="me-4" color="red" />Blogs</NavLink >
+                        <NavLink  className="nav-link ms-5" to="/contact" > <FaAddressBook size={15} className="me-4" color="red" />Contact</NavLink >
                     </Nav>
 
-                    <Nav>
+                    <Nav className="ms-auto">
                         <Container>
 
                             <Row>
@@ -102,18 +107,20 @@ const HomeHeaderComponent = () => {
                         </Container>
                     </Nav>
 
+                  
 
-
-
+                     
 
                 </Navbar.Collapse>
+             
 
             </Container>
 
 
 
         </Navbar>
-
+        <div style={{ borderBottom: '1px solid #ccc', margin: '0 15px' }}></div>
+      
 
 
     </>)

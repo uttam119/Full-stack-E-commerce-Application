@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { ListGroup, Badge } from "react-bootstrap";
-import { FaBolt, FaFootballBall, FaMobile, FaPhone, FaTshirt } from "react-icons/fa";
+import { FaBolt, FaFootballBall, FaListAlt, FaMobile, FaPhone, FaTshirt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 // import { FaShirt } from "react-icons/fa";
 
@@ -27,6 +27,7 @@ const getCatList=useCallback(async()=>{
  
   return (
     <>
+    <h3 className="mx-3 ">Category <FaListAlt size={15} className="me-2" color="red" /> <i></i></h3>
       <ListGroup as="ul">
         {
           categoryList  && categoryList.map((row,ind)=>(

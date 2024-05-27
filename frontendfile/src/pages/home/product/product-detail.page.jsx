@@ -7,20 +7,24 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 const ProductDetail =()=>{
-    const [loading,setLoading] = useState()
+  console.log("i am don in product detail")
+    const [loading,setLoading] = useState(true)
     const params=useParams()
     const [detail,setDetail] =useState()
     const settings = {
-        dots: false,
+        dots: true,
         infinite: true,
+        arrows:true,
         speed: 500,
         slideShow: 1,
         slidesToScroll: 1,
       };
+      console.log(params.slug)
     const getProductDetail =useCallback(async()=>{
 try{
+  console.log("here is params",params.slug)
 const response=await productSvc.getProductDetail(params.slug)
-setDetail(response.result[0])
+setDetail(response.result)
 }catch(exception){
 //
 }finally{
@@ -30,10 +34,12 @@ setDetail(response.result[0])
     },[])
 
     useEffect(()=>{
+      console.log("goood")
 getProductDetail()
-    },[])
+    },[params])
 return(
    <>
+ 
    <Container className="my-5">
 
     <Row>
@@ -62,27 +68,19 @@ return(
             </div>
           ))
         }
-        {/* <div>
-          <img className="img img-fluid" src={banner1} alt="Banner 1" />
-        </div>
-        <div>
-          <img className="img img-fluid" src={banner2} alt="banner2" />
-        </div>
-        <div>
-          <img className="img img-fluid" src={banner3} alt="banner3" />
-        </div>
-        <div>
-          <img className="img img-fluid" src={banner2} alt="banner21" />
-        </div>
-        <div>
-          <img className="img img-fluid" src={banner1} alt="banner231" />
-        </div> */}
+      
       </Slider>
 </Col>
 <Col sm={12} md={6} lg={8}>
     <h4>{detail.title}</h4>
     <hr />
     <div>{detail.summary}</div>
+    <p>
+                    <strong className="me-3">
+                     Npr. {detail.price}
+                    </strong>
+                    <del className="text-danger">Npr.{detail.price*detail.discount/100}</del>
+                    </p>
     <div>
         {
             new Intl.NumberFormat("en-NP",{style:"currency",currency:"Npr"}).format(detail.afterDiscount)
@@ -96,12 +94,12 @@ return(
        }
     </Row>
 
-<Row>
+{/* <Row>
     <Col sm={12} dangerouslySetInnerHTML={{__html:detail.description}}>
 
     </Col>
 </Row>
-
+ */}
 
 
 

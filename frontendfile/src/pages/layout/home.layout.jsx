@@ -12,7 +12,7 @@ const HomeLayout =()=>{
 
 
 
-        <HomeComponent.HomeFooterComponent ></HomeComponent.HomeFooterComponent>
+        <HomeComponent.HomeFooterComponent  ></HomeComponent.HomeFooterComponent>
         
         </>
     )
